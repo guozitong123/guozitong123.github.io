@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>数据结构第二章</title>
+      <link href="/2023/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%AB%A0/"/>
+      <url>/2023/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="x3D-x3D-第二章线性表-x3D-x3D"><a href="#x3D-x3D-第二章线性表-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;第二章线性表&#x3D;&#x3D;"></a>&#x3D;&#x3D;第二章线性表&#x3D;&#x3D;</h3><h4 id="2-1线性表的定义和基本操作"><a href="#2-1线性表的定义和基本操作" class="headerlink" title="2.1线性表的定义和基本操作"></a>2.1线性表的定义和基本操作</h4><h5 id="2-1-1线性表的定义"><a href="#2-1-1线性表的定义" class="headerlink" title="2.1.1线性表的定义"></a>2.1.1线性表的定义</h5><p><strong>相同</strong>(每个数据元素所占空间一样大)数据类型</p><p>有限序列(有次序)</p><p>第i个——位序</p><h5 id="2-1-2-线性表的基本操作"><a href="#2-1-2-线性表的基本操作" class="headerlink" title="2.1.2 线性表的基本操作"></a>2.1.2 线性表的基本操作</h5><p>Tips：</p><p>1.对数据的操作（记忆思路）——创销、增删改查</p><p>2.C语言函数的定义——&lt;返回值类型&gt;函数名(&lt;参数1类型&gt;参数1, &lt;参数2类型&gt;参数2…)</p><p>3.实际开发中，可根据实际需求定义其他的基本操作</p><p>4.函数名和参数的形式、命名都可以改变，but要有可读性</p><p><strong>5</strong>.什么时候要传入引用“&amp;”——对参数的修改结果需要“<strong>带回来</strong>”</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">x = <span class="number">1024</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;test函数内部 x=%d\n&quot;</span>, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line"><span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;调用test前 x=%d\n&quot;</span>, x);</span><br><span class="line">test(x);<span class="comment">//里面的x只是main的复制品</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;调用test后 x=%d\n&quot;</span>, x);<span class="comment">//对参数的修改没带回来</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>​结果：<img src="/2023/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%AB%A0/1.1.png" alt="1.1"></p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> &amp; x)</span> &#123;</span><br><span class="line">x = <span class="number">1024</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;test函数内部 x=%d\n&quot;</span>, x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line"><span class="type">int</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;调用test前 x=%d\n&quot;</span>, x);</span><br><span class="line">test(x);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;调用test后 x=%d\n&quot;</span>, x);<span class="comment">//对参数的修改带回来了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>​结果：<img src="/2023/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%AB%A0/1.2.png" alt="1.2"></p><h4 id="2-2线性表的顺序表示"><a href="#2-2线性表的顺序表示" class="headerlink" title="2.2线性表的顺序表示"></a>2.2线性表的顺序表示</h4><h5 id="2-2-1顺序表的定义"><a href="#2-2-1顺序表的定义" class="headerlink" title="2.2.1顺序表的定义"></a>2.2.1顺序表的定义</h5><p>如何知道一个数据元素的大小？</p><p>C语言   sizeof(ElemType)，ElemType就是你的顺序表中存放的数据元素类型</p><p><strong>静态分配：</strong></p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MaxSize 10<span class="comment">//定义最大长度</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">  <span class="type">int</span> data[MaxSize];<span class="comment">// 用静态的“数组”存放数据元素</span></span><br><span class="line">  <span class="type">int</span> length;<span class="comment">// 顺序表的当前长度</span></span><br><span class="line">&#125;SqList;<span class="comment">// 顺序表的类型定义</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 基本操作——初始化一个顺序表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">InitList</span><span class="params">(SqList &amp;L)</span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i&lt;MaxSize; i++)</span><br><span class="line">    L.data[i] = <span class="number">0</span>;<span class="comment">// 将所有数据元素设置为默认初始值</span></span><br><span class="line">  L.length = <span class="number">0</span>;<span class="comment">// 顺序表初始长度为0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">SqList L;<span class="comment">// 声明一个顺序表</span></span><br><span class="line">  InitList(L);<span class="comment">// 初始化顺序表</span></span><br><span class="line">  <span class="comment">//......未完待续，后续操作</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>​<strong>静态数组的长度是不可变的，声明之后，数组的大小和空间事先已经固定，所以有一定的局限性</strong></p><p><strong>动态分配：</strong></p><p>Key：动态申请和释放内存空间</p><p>C —-     malloc、 free  函数</p><p>malloc：会申请一整片连续的内存空间</p><p>malloc 函数返回一个指针，需要强制转型为你定义的数据元素类型指针。</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span><span class="comment">//malloc、free 函数的头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> InitSize 10<span class="comment">//默认的最大长度</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">  <span class="type">int</span> *data;<span class="comment">// 指示动态分配数组的指针</span></span><br><span class="line">  <span class="type">int</span> MaxSize;<span class="comment">// 顺序表的最大容量</span></span><br><span class="line">  <span class="type">int</span> length;<span class="comment">// 顺序表的当前长度</span></span><br><span class="line">&#125;SqList;<span class="comment">// 顺序表的类型定义</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 基本操作——初始化一个顺序表</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">InitList</span><span class="params">(SqList &amp;L)</span>&#123;</span><br><span class="line">  <span class="comment">// 用 malloc 函数申请一片连续的存储空间</span></span><br><span class="line">  L.data = (<span class="type">int</span> *)<span class="built_in">malloc</span>(InitSize*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">  L.length = <span class="number">0</span>;<span class="comment">// 顺序表初始长度为0</span></span><br><span class="line">  L.MaxSize = InitSize;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增加动态数组的长度</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">IncreaseSize</span><span class="params">(SeqList &amp;L, <span class="type">int</span> len)</span>&#123;</span><br><span class="line">  <span class="type">int</span> *p = L.data;</span><br><span class="line">  L.data = (<span class="type">int</span> *)<span class="built_in">malloc</span>((L.MaxSize)+len)*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i&lt;L.length; i++)&#123;</span><br><span class="line">    L.data[i]=p[i];     <span class="comment">// 将数据复制到新区域（but 时间开销大）</span></span><br><span class="line">  &#125;</span><br><span class="line">  L.MaxSize = L.MaxSize+len;<span class="comment">// 顺序表最大长度增加 len</span></span><br><span class="line">  <span class="built_in">free</span>(p);<span class="comment">// 释放原来的内存空间</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">SqList L;<span class="comment">// 声明一个顺序表</span></span><br><span class="line">  InitList(L);<span class="comment">// 初始化顺序表</span></span><br><span class="line">  <span class="comment">//......往顺序表中随便插入几个元素</span></span><br><span class="line">  IncreaseSize(L,<span class="number">5</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/2023/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%AB%A0/1.3.png" alt="1.3"></p><p>绿色那块会被释放，因为 free 函数</p><p><strong>顺序表的特点：</strong></p><p>（1）随机访问：能在O(1)的时间内找到第i个元素</p><p>（2）存储密度高</p><p>（3）拓展容量不方便</p><p>（4）插入、删除操作不方便，需要移动大量元素</p><h5 id="2-2-2顺序表上基本操作的实现"><a href="#2-2-2顺序表上基本操作的实现" class="headerlink" title="2.2.2顺序表上基本操作的实现"></a>2.2.2顺序表上基本操作的实现</h5><p><strong>顺序表的基本操作——插入</strong></p><p><img src="/2023/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%AB%A0/1.4.png" alt="1.4"></p><p>其中i的合法值 [1,length+1]</p><p><img src="/2023/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%AB%A0/1.5.png" alt="1.5"></p><p><strong>插入操作的时间复杂度</strong>——关注最深层循环语句的执行次数与问题规模n的关系</p><p><img src="/2023/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%AB%A0/1.6.png" alt="1.6"></p><p>问题规模——   n&#x3D;L.length</p><p>最好情况——新元素插入表尾，不需要移动元素，i&#x3D;n+1,循环0次，                          最好时间复杂度 &#x3D; O(1)</p><p>最坏情况——新元素插入表头，需要将原有的n个元素全都向后移动，i&#x3D;1,循环n次，最好时间复杂度 &#x3D; O(1)</p><p>平均时间复杂度——p&#x3D;1&#x2F;(n+1)</p><p><strong>顺序表的基本操作——删除</strong></p><p><img src="/2023/02/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%BA%8C%E7%AB%A0/1.7.png" alt="1.7"></p><p>e是引用变量，所以在bool和main中，都是同一个</p><p><strong>时间复杂度</strong>——见课本</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 线性表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>高数课后题1.2</title>
+      <link href="/2023/02/03/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.2/"/>
+      <url>/2023/02/03/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.2/</url>
+      
+        <content type="html"><![CDATA[<p>&#x3D;&#x3D;高数课后题1.2&#x3D;&#x3D;</p><p><img src="/2023/02/03/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.2/1.1.jpg" alt="1.1"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 高等数学 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 高数 </tag>
+            
+            <tag> 数列极限 </tag>
+            
+            <tag> 高数课后练习题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数据结构第一章</title>
+      <link href="/2023/02/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
+      <url>/2023/02/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%B8%80%E7%AB%A0/</url>
+      
+        <content type="html"><![CDATA[<h3 id="1-2-算法和算法评价"><a href="#1-2-算法和算法评价" class="headerlink" title="1.2 算法和算法评价"></a>1.2 算法和算法评价</h3><h5 id="1-2-1-算法的基本概念"><a href="#1-2-1-算法的基本概念" class="headerlink" title="1.2.1 算法的基本概念"></a>1.2.1 算法的基本概念</h5><p>注：算法必须是有穷的，而程序可以是无穷的</p><p><strong>高效率</strong>：花的时间少，时间复杂度低</p><p><strong>低存储量需求</strong>：不费内存，空间复杂度低</p><p><strong>评估算法时间开销</strong>：（可以用事后统计但是存在问题）：</p><p>（1）机器性能，如：超级计算机vs单片机</p><p>（2）编译语言：语言越高级，执行效率越低</p><p>（3）与编译程序产生的机器指令质量有关</p><p>（4）某些算法不可事后统计，如：导弹控制算法</p><h5 id="1-2-2-算法的时间复杂度"><a href="#1-2-2-算法的时间复杂度" class="headerlink" title="1.2.2 算法的时间复杂度"></a>1.2.2 算法的时间复杂度</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//算法一 —— 逐步递增型爱你</span></span><br><span class="line"><span class="comment">//函数声明</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">loveYou</span><span class="params">(<span class="type">int</span> n)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">loveYou(<span class="number">3000</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">loveYou</span><span class="params">(<span class="type">int</span> n)</span> &#123;  <span class="comment">//n 为问题规模</span></span><br><span class="line">（<span class="number">1</span>）<span class="type">int</span> i = <span class="number">1</span>;  <span class="comment">//爱你的程度</span></span><br><span class="line">（<span class="number">2</span>） <span class="keyword">while</span> (i &lt;= n) &#123;</span><br><span class="line">（<span class="number">3</span>）i++;  <span class="comment">//每次+1</span></span><br><span class="line">（<span class="number">4</span>）  <span class="built_in">printf</span>(<span class="string">&quot;I Love You %d\n&quot;</span>, i);</span><br><span class="line">    &#125;</span><br><span class="line">（<span class="number">5</span>）    <span class="built_in">printf</span>(<span class="string">&quot;I Love You More Than %d\n&quot;</span>,n);;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>语句<strong>频度</strong>：</p><p>（1）——1次</p><p>（2）——3001次                                                                                                                                                                                                                                                                                         </p><p>（3）（4）——3000次</p><p>（5）——1次</p><p>T(3000)&#x3D;1+3001+2*3000+1</p><p>时间开销与问题规模n的关系:T(n)&#x3D;3n+3</p><p><strong>问题一：</strong>是否可以忽略表达式中的某些部分？</p><p><img src="/2023/02/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%B8%80%E7%AB%A0/1.1.png" alt="1.1"></p><p><strong>我们可以直接把低阶的部分去掉和系数变为1，保留阶数更高的部分就行</strong></p><p>T1(n)&#x3D;O(n)，其中O表示“同阶”，同等数量级。</p><p><strong>常见的渐进时间复杂：</strong>（常对幂指阶）</p><p><img src="/2023/02/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%B8%80%E7%AB%A0/1.2.png" alt="1.2"></p><p><strong>问题二：如果有好几千行代码，按这种方法需要一行一行数？</strong></p><p>​结论一：顺序执行的代码只会影响常数项，可以忽略</p><p>​结论二：只需挑循环中的<strong>一个基本操作</strong>分析它的执行次数与n的关系即可</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">loveYou</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line"><span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt;= n) &#123;<span class="comment">//外层循环执行n次</span></span><br><span class="line">i++;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;I Love You %d\n&quot;</span>, i);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;<span class="comment">//嵌套两层循环</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;I am Iron Man\n&quot;</span>);<span class="comment">//内层循环共执行n²次</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;I Love You More Than %d\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>​时间开销与问题规模的n的关系：</p><p>​T(n)&#x3D;O(n)+O(n²)&#x3D;O(n²)&#x2F;&#x2F;加法规则</p><p>​结论三：如果有多层嵌套循环，只需关注最深层循环循环了几次</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//算法3—— 指数递增型爱你</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">loveYou</span><span class="params">(<span class="type">int</span> n)</span> &#123;<span class="comment">//n 为问题规模</span></span><br><span class="line"><span class="type">int</span> i = <span class="number">1</span>;<span class="comment">//爱你的程度</span></span><br><span class="line"><span class="keyword">while</span> (i &lt;= n) &#123;</span><br><span class="line">i = i * <span class="number">2</span>;<span class="comment">//每次翻倍</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;I Love You %d\n&quot;</span>,i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;I Love You More Than %d\n&quot;</span>,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/2023/02/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%B8%80%E7%AB%A0/1.3.png" alt="1.3"></p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//算法4—— 搜索数字型爱你</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">loveYou</span><span class="params">(<span class="type">int</span> flag[], <span class="type">int</span> n)</span> &#123;<span class="comment">//n 为问题规模</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;I Am Iron Man\n&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;<span class="comment">//从第一个元素开始查找</span></span><br><span class="line"><span class="keyword">if</span> (flag[i] == n) &#123;<span class="comment">//找到元素n</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;I Love You %d\n&quot;</span>, n);</span><br><span class="line"><span class="keyword">break</span>;<span class="comment">//找到后跳出循环</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//flag 数组中乱序存放了 1~n 这些数</span></span><br><span class="line"><span class="type">int</span> flag[n] = &#123; <span class="number">1.</span>...n &#125;;</span><br><span class="line">loveYou(flag, n);</span><br></pre></td></tr></table></figure><p>​计算上述算法的时间复杂度T(n):</p><p>​    最好情况：元素n在第一个位置–最好时间复杂度T(n)&#x3D;O(1)</p><p>​最坏情况：元素n在最后一个位置    –最坏时间复杂度T(n)&#x3D;O(n)</p><p>​平均情况：假设元素n在任意一个位置的概率相同为1&#x2F;n          –平均时间复杂度          T(n)&#x3D;O(n)</p><p><img src="/2023/02/02/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%AC%E4%B8%80%E7%AB%A0/1.4.png" alt="1.4"></p><p><strong>很多算法执行时间与输入的数据有关</strong></p><h5 id="1-2-3-空间复杂度"><a href="#1-2-3-空间复杂度" class="headerlink" title="1.2.3 空间复杂度"></a>1.2.3 空间复杂度</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">loveYou</span><span class="params">(<span class="type">int</span> n)</span> &#123;  <span class="comment">//n 为问题规模</span></span><br><span class="line"><span class="type">int</span> i = <span class="number">1</span>;  <span class="comment">//爱你的程度</span></span><br><span class="line"><span class="keyword">while</span> (i &lt;= n) &#123;</span><br><span class="line">i++;  <span class="comment">//每次+1</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;I Love You %d\n&quot;</span>, i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;I Love You More Than %d\n&quot;</span>, n);;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>该算法中，不管n的值如何变化，它所需要的内存空间大小都是固定不变的一个常数值，算法<strong>空间复杂度</strong>为：    S(n) &#x3D; O(1)</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">  <span class="type">int</span> flagp[n];</span><br><span class="line">  <span class="type">int</span> i;</span><br><span class="line">  <span class="comment">//......此处省略很多代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>假设一个int变量占 4B….. 则所需内存空间 &#x3D; 4+4n+4 &#x3D; 4n+8</p><p>则 S(n)&#x3D;O(n)</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> i)</span>&#123;</span><br><span class="line">  <span class="type">int</span> flag[n][n];<span class="comment">//声明 n*n 维的二维数组</span></span><br><span class="line">  <span class="type">int</span> i;</span><br><span class="line">  <span class="comment">//......此处省略很多代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>所需内存空间 &#x3D; 4n²+4          则 S(n)&#x3D;O(n²)</p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> i)</span>&#123;</span><br><span class="line">  <span class="type">int</span> flag[n][n];<span class="comment">//声明 n*n 维的二维数组</span></span><br><span class="line">  <span class="type">int</span> other[n];<span class="comment">//声明一个长度为n的数组</span></span><br><span class="line">  <span class="type">int</span> i;</span><br><span class="line">  <span class="comment">//......此处省略很多代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>S(n) &#x3D; O(n²)+O(n)+O(1)&#x3D;O(n²)       &#x2F;&#x2F;加法规则</p><p><strong>函数递归调用带来的内存开销</strong></p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//算法5—— 递归型爱你</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">loveYou</span><span class="params">(<span class="type">int</span> n)</span>&#123;<span class="comment">//n 为局部变量</span></span><br><span class="line">  <span class="type">int</span> a, b, c;<span class="comment">//声明一系列局部变量</span></span><br><span class="line">  <span class="comment">//...... 省略代码</span></span><br><span class="line">  <span class="keyword">if</span> (n&gt;<span class="number">1</span>)&#123;</span><br><span class="line">    loveYou(n<span class="number">-1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;I Love You %d\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">  loveYou(<span class="number">5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>假设每层调用k个字节，则n层就是kn个字节</p><p>S(n)&#x3D;O(n)<strong>空间复杂度&#x3D;递归调用的深度</strong></p><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//算法5—— 递归型爱你</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">loveYou</span><span class="params">(<span class="type">int</span> n)</span>&#123;<span class="comment">//n 为局部变量</span></span><br><span class="line">  <span class="type">int</span> flag[n];<span class="comment">//声明一个数组</span></span><br><span class="line">  <span class="type">int</span> a, b, c;<span class="comment">//声明一系列局部变量</span></span><br><span class="line">  <span class="comment">//...... 省略代码</span></span><br><span class="line">  <span class="keyword">if</span> (n&gt;<span class="number">1</span>)&#123;</span><br><span class="line">    loveYou(n<span class="number">-1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;I Love You %d\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">  loveYou(<span class="number">5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>各级递归调用所需要的存储flag数组的空间为：1+2+3+….+n&#x3D;[n(1+n)&#x2F;2]&#x3D;(1&#x2F;2)n²+(1&#x2F;2)n</p><p>S(n)&#x3D;O(n²)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 数据结构第一章 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>高数课后题1.1</title>
+      <link href="/2023/01/28/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.1/"/>
+      <url>/2023/01/28/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.1/</url>
+      
+        <content type="html"><![CDATA[<p>&#x3D;&#x3D;高数课后题1.1&#x3D;&#x3D;</p><p>课本是同济大学数学系编，只做了一些重点题。</p><p><img src="/2023/01/28/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.1/1.1.jpg" alt="1.1"></p><p><img src="/2023/01/28/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.1/1.2.jpg" alt="1.2"></p><p><img src="/2023/01/28/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.1/1.3.jpg" alt="1.3"></p><p><img src="/2023/01/28/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.1/1.4.jpg" alt="1.4"></p><p><img src="/2023/01/28/%E9%AB%98%E6%95%B0%E8%AF%BE%E5%90%8E%E9%A2%981.1/1.5.jpg" alt="1.5"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 高等数学 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 高数 </tag>
+            
+            <tag> 映射与函数 </tag>
+            
+            <tag> 高数课后练习题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>高数第二讲</title>
+      <link href="/2023/01/28/%E9%AB%98%E6%95%B0%E7%AC%AC%E4%BA%8C%E8%AE%B2/"/>
+      <url>/2023/01/28/%E9%AB%98%E6%95%B0%E7%AC%AC%E4%BA%8C%E8%AE%B2/</url>
+      
+        <content type="html"><![CDATA[<p>&#x3D;&#x3D;数列极限&#x3D;&#x3D;</p><h4 id="1-总结"><a href="#1-总结" class="headerlink" title="1.总结"></a>1.总结</h4><p><img src="/2023/01/28/%E9%AB%98%E6%95%B0%E7%AC%AC%E4%BA%8C%E8%AE%B2/1.1.jpg" alt="1.1"></p><h4 id="2-思维导图"><a href="#2-思维导图" class="headerlink" title="2.思维导图"></a>2.思维导图</h4>]]></content>
+      
+      
+      <categories>
+          
+          <category> 高等数学 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 高数 </tag>
+            
+            <tag> 数列极限 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>高数第一讲</title>
+      <link href="/2023/01/19/%E9%AB%98%E6%95%B0%E7%AC%AC%E4%B8%80%E8%AE%B2/"/>
+      <url>/2023/01/19/%E9%AB%98%E6%95%B0%E7%AC%AC%E4%B8%80%E8%AE%B2/</url>
+      
+        <content type="html"><![CDATA[<h3 id="x3D-x3D-基础知识-x3D-x3D"><a href="#x3D-x3D-基础知识-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;基础知识&#x3D;&#x3D;"></a>&#x3D;&#x3D;基础知识&#x3D;&#x3D;</h3><p>以下内容是对高数第一讲的总结，在这里参考讲义为张宇的基础30讲(高数部分)</p><span id="more"></span><h4 id="1-总结"><a href="#1-总结" class="headerlink" title="1.总结"></a>1.总结</h4><p><img src="/../images/%E9%AB%98%E6%95%B0%E7%AC%AC%E4%B8%80%E8%AE%B2/1.2.jpg"></p><p><img src="/../images/%E9%AB%98%E6%95%B0%E7%AC%AC%E4%B8%80%E8%AE%B2/1.3-1674129185324.jpg" alt="1.3"></p><p><img src="/../images/%E9%AB%98%E6%95%B0%E7%AC%AC%E4%B8%80%E8%AE%B2/1.4-1674129217571.jpg" alt="1.4"></p><h4 id="2-思维导图"><a href="#2-思维导图" class="headerlink" title="2.思维导图"></a>2.思维导图</h4><p><img src="/../images/%E9%AB%98%E6%95%B0%E7%AC%AC%E4%B8%80%E8%AE%B2/1.1.png" alt="1.1"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 高等数学 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 高数 </tag>
+            
+            <tag> 高数基础知识 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第一篇博客</title>
+      <link href="/2023/01/15/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+      <url>/2023/01/15/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+      
+        <content type="html"><![CDATA[<h3 id="happy"><a href="#happy" class="headerlink" title="happy"></a>happy</h3><p>这是我的第一篇博客，搭建成功了很开心。主要目的就是为了记录一下自己的生活。今年打算考研了，因为本专业的原因，所以电子笔记更方便一点，也是为了将笔记上传到我的博客中方便以后查阅复习。当然最主要的目的就是为了记录一下自己的生活。相当于一个成长录吧。最重要的还是要坚持写下去，当然以后有更多好玩的事也会常常分享的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日常记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Typora </tag>
+            
+            <tag> Markdown </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
